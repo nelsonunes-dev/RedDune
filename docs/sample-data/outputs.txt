@@ -1,0 +1,17 @@
+# Expected outputs for docs/sample-data/inputs.txt
+# Each line corresponds to the simulation in inputs.txt
+
+# Simulation 1: 5x3 grid
+(1, 1) E
+(3, 2) N LOST
+(0, 2) W
+
+# Simulation 2: 10x10 grid
+(2, 3) E
+(4, 5) N LOST
+(6, 7) W
+
+# Simulation 3: 50x50 grid
+(25, 25) E
+(10, 10) E
+(4, 0) S
