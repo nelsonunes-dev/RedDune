@@ -5,6 +5,13 @@
   <Folder Name="/Core/">
     <Project Path="src/Core/RedDune.Core/RedDune.Core.csproj" Id="62aa1ef5-7c03-4fbe-a115-9013a938959b" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="docs/sample-data/inputs.txt" />
+    <File Path="docs/sample-data/outputs.txt" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="tests/RedDune.Api.Tests/RedDune.Api.Tests.csproj" />
     <Project Path="tests/RedDune.Tests/RedDune.Tests.csproj" />

@@ -47,71 +47,42 @@ The system must:
 
 ```text
 RedDune
-├── docs
-│   ├── BRD.md
 ├── src
-│   ├── Core                            # C# domain & application logic
-│   │   ├── Domain
-│   │   │   ├── Coordinates
-│   │   │   ├── Orientation
-│   │   │   ├── Robot
-│   │   │   ├── World
-│   │   │   └── Scent
-│   │   ├── Application
-│   │   │   ├── SimulationEngine
-│   │   │   ├── Parsers
-│   │   │   └── DTOs
-│   │   └── Core.csproj
+│   ├── Core                        # C# domain & application logic
+│   │   ├── Domain                  # Coordinates, Orientation, Command, Robot, Grid, Scent
+│   │   ├── Application             # SimulationEngine, DTOs
+│   │   └── RedDune.Core.csproj
 │   │
-│   ├── Api                             # C# Minimal API host
+│   ├── Api                         # C# Minimal API host
 │   │   ├── Endpoints
 │   │   ├── Requests
 │   │   ├── Responses
-│   │   ├── Program.cs
-│   │   └── Api.csproj
+│   │   └── RedDune.Api.csproj
 │   │
-│   ├── Console                          # TypeScript CLI (no UI)
-│   │   ├── src
-│   │   │   ├── cli.ts
-│   │   │   ├── apiClient.ts
-│   │   │   ├── inputParser.ts
-│   │   │   └── index.ts
-│   │   ├── tests
-│   │   ├── package.json
-│   │   ├── tsconfig.json
-│   │   └── README.md
-└── Tests
-│   ├── RedDune.Tests
-│   │   ├── Domain.Tests
-│   │   ├── Application.Tests
-│   │   ├── Api.Tests
-│   │   └── RedDune.Tests.csproj
-│   │
-│   └── typescript.Tests
-│       ├── cli.test.ts
-│       ├── contract.test.ts
-│       └── jest.config.js
+│   └── Console                     # TypeScript CLI
+│       ├── src                     # cli.ts, apiClient.ts, inputParser.ts
+│       └── package.json
 │
+├── docs
+│   └── sample-data
+│       ├── inputs.txt            # Sample input files (one simulation per blank line)
+│       └── outputs.txt
 │
-├── .editorconfig
-├── .gitignore
-├── README.md
-└── RedDune.sln
-
+└── tests
+    ├── RedDune.Tests               # C# unit tests
+    └── console/
+        └── typescript.tests        # TypeScript tests
 ```
 
 ## Key Architecture Decisions (Intentional)
 
-✅ Monolith
-Chosen to minimise accidental complexity and reflect early‑phase client discovery work.
-✅ Minimal API (C#)
-Provides a realistic consumption boundary without introducing distributed systems overhead.
-✅ TypeScript CLI Client
-Demonstrates consumer‑side thinking and contract awareness without UI noise.
-❌ Database
-Not required due to execution‑scoped lifecycle. Persistence explicitly deferred.
-❌ Frontend UI
-Adds presentation complexity without improving confidence in correctness.
+| Decision | Reason |
+| --- | --- |
+| ✅ Monolith first | Minimize accidental complexity |
+| ✅ Minimal API | Realistic consumption boundary without distributed systems |
+| ✅ TypeScript CLI | Consumer-side thinking without UI noise |
+| ❌ No Database | Execution-scoped lifecycle, persistence deferred |
+| ❌ No Frontend UI | Presentation complexity deferred |
 
 ## Success Criteria
 
@@ -127,25 +98,31 @@ Adds presentation complexity without improving confidence in correctness.
 | Sprint | User Story | Tasks |
 | --- | --- | --- |
 | Sprint 1 | Foundations | Add BRD and problem analysis |
-| | Solution | Scaffold .NET solution and project structure |
-| Sprint 2 | Core Domain | |
-| | Domain | Model coordinates, orientation, and commands |
+| Sprint 2 | Solution | Scaffold .NET solution and project structure |
+| Sprint 3 | Core Domain | |
+| | Domain Layer | Model coordinates, orientation, and commands |
 | | | Implement robot movement rules |
 | | | Implement grid boundaries and scent tracking |
 | | | Cover robot movement and boundary loss scenarios |
-| Sprint 3 | Application Layer | |
-| | Application | Implement simulation engine |
-| | Tests | Scenario-based simulation tests |
-| Sprint 4 | Execution Boundary | |
+| | Application Layer | Implement simulation engine |
+| Sprint 4 | Api | |
 | | Api | Add minimal Api endpoint for simulation |
+| Sprint 5 | Tests | |
+| | Tests | Scenario-based simulation tests |
 | | Tests | Api-level integration test |
-| Sprint 5 | Typescript Consumer | |
+| Sprint 6 | Typescript Consumer | |
 | | Client | Scaffold Typescript CLI |
 | | Client | Consume simulation Api |
 | | Tests | Client contract and happy-path tests |
-| Sprint 6 | Decision Transparency | |
-| | Docs | Add architecture decision log |
-| | Docs | Add future evaluation and client next steps |
+| Sprint 7 | Decision Transparency | |
+| | Docs | Add architecture decision log (ADR-001 through ADR-020) |
+| | Docs | Add future evaluation and client next steps guide |
+| | Docs | Link decision records to README |
+| Sprint 8 | Multi-Language CLI Expansion | |
+| | Client | Add .NET Core CLI implementation |
+| | Client | Add Python CLI implementation |
+| | Tests | Unified test specification with shared scenarios |
+| | Docs | Update architecture decisions for new consumers |
 
 ## Testing Strategy
 
@@ -159,10 +136,11 @@ Adds presentation complexity without improving confidence in correctness.
 - Scenario tests for full robot sequences.
 - Minimal Api integration test
 
-### Typescript
+### Typescript (tests/console/typescript.tests/)
 
 - Contract tests against known input/output
 - CLI parsing tests
+- ApiClient tests
 - Error handling (invalid input)
 
 ### Testing Principles

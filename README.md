@@ -35,9 +35,12 @@ RedDune
 │       └── package.json
 │
 ├── docs
+│   ├── architecture                     # Architecture Decision Records (ADRs)
+│   │   └── decisions.md                 # Complete decision log (ADR-001 to ADR-020)
+│   ├── BRD.md                          # Business Requirements Document
 │   └── sample-data
-│       ├── inputs.txt            # Sample input files
-│       └── outputs.txt            # Expected outputs
+│       ├── inputs.txt                  # Sample input files
+│       └── outputs.txt                 # Expected outputs
 │
 └── tests
     ├── RedDune.Tests               # C# unit tests
@@ -47,6 +50,8 @@ RedDune
 
 ## Key Decisions
 
+See [docs/architecture/decisions.md](docs/architecture/decisions.md) for the complete Architecture Decision Log (ADRs 001–020).
+
 | Decision | Reason |
 | --- | --- |
 | ✅ Monolith first | Minimize accidental complexity |
@@ -54,6 +59,15 @@ RedDune
 | ✅ TypeScript CLI | Consumer-side thinking without UI noise |
 | ❌ No Database | Execution-scoped lifecycle, persistence deferred |
 | ❌ No Frontend UI | Presentation complexity deferred |
+
+## Documentation
+
+| Document | Description |
+| --- | --- |
+| [Business Requirements Document](docs/BRD.md) | Project purpose, problem statement, non-functional requirements |
+| [Architecture Decisions](docs/architecture/decisions.md) | Complete ADR log (20 decisions) with rationale and trade-offs |
+| [Future Evaluation](docs/future-evaluation.md) | System evolution scenarios and client implementation guidance |
+| [Client Next Steps](docs/client-next-steps.md) | Integration examples, troubleshooting, deployment checklist |
 
 ## Quick Start
 
