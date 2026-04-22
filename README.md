@@ -35,9 +35,6 @@ RedDune
 │       └── package.json
 │
 ├── docs
-│   ├── architecture                     # Architecture Decision Records (ADRs)
-│   │   └── decisions.md                 # Complete decision log (ADR-001 to ADR-020)
-│   ├── BRD.md                          # Business Requirements Document
 │   └── sample-data
 │       ├── inputs.txt                  # Sample input files
 │       └── outputs.txt                 # Expected outputs
@@ -49,8 +46,6 @@ RedDune
 ```
 
 ## Key Decisions
-
-See [docs/architecture/decisions.md](docs/architecture/decisions.md) for the complete Architecture Decision Log (ADRs 001–020).
 
 | Decision | Reason |
 | --- | --- |
@@ -65,9 +60,6 @@ See [docs/architecture/decisions.md](docs/architecture/decisions.md) for the com
 | Document | Description |
 | --- | --- |
 | [Business Requirements Document](docs/BRD.md) | Project purpose, problem statement, non-functional requirements |
-| [Architecture Decisions](docs/architecture/decisions.md) | Complete ADR log (20 decisions) with rationale and trade-offs |
-| [Future Evaluation](docs/future-evaluation.md) | System evolution scenarios and client implementation guidance |
-| [Client Next Steps](docs/client-next-steps.md) | Integration examples, troubleshooting, deployment checklist |
 
 ## Quick Start
 
@@ -116,7 +108,6 @@ dotnet test
 ### TypeScript Tests
 
 ```bash
-# Run from the tests directory
 cd tests/console/typescript.tests
 npm install
 npm test

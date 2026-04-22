@@ -114,15 +114,6 @@ RedDune
 | | Client | Scaffold Typescript CLI |
 | | Client | Consume simulation Api |
 | | Tests | Client contract and happy-path tests |
-| Sprint 7 | Decision Transparency | |
-| | Docs | Add architecture decision log (ADR-001 through ADR-020) |
-| | Docs | Add future evaluation and client next steps guide |
-| | Docs | Link decision records to README |
-| Sprint 8 | Multi-Language CLI Expansion | |
-| | Client | Add .NET Core CLI implementation |
-| | Client | Add Python CLI implementation |
-| | Tests | Unified test specification with shared scenarios |
-| | Docs | Update architecture decisions for new consumers |
 
 ## Testing Strategy
 
