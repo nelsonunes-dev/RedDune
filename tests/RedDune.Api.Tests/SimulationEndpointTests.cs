@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
 using RedDune.Api.Requests;
 using RedDune.Api.Responses;
 using Xunit;

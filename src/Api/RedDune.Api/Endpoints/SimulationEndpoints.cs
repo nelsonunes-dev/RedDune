@@ -12,16 +12,33 @@ public static class SimulationEndpoints
         app.MapPost("/api/simulation", Simulate);
     }
 
-    private static IResult Simulate(SimulationRequest request)
+    private static async Task<IResult> Simulate(HttpContext httpContext, SimulationRequest request)
     {
+        var configuration = httpContext.RequestServices.GetRequiredService<IConfiguration>();
+        var maxGridSize = configuration.GetValue<int>("Simulation:MaxGridSize", 50);
+        var maxCommandLength = configuration.GetValue<int>("Simulation:MaxCommandLength", 100);
+
         if (request.GridWidth < 0 || request.GridHeight < 0)
         {
             return Results.BadRequest("Grid dimensions must be non-negative");
         }
 
+        if (request.GridWidth > maxGridSize || request.GridHeight > maxGridSize)
+        {
+            return Results.BadRequest($"Grid dimensions cannot exceed {maxGridSize}x{maxGridSize}");
+        }
+
         if (request.Robots == null || request.Robots.Count == 0)
         {
             return Results.Ok(new SimulationResponse(Array.Empty<RobotResponse>()));
+        }
+
+        foreach (var robot in request.Robots)
+        {
+            if (robot.Commands != null && robot.Commands.Length > maxCommandLength)
+            {
+                return Results.BadRequest($"Commands cannot exceed {maxCommandLength} characters");
+            }
         }
 
         var engine = new SimulationEngine(request.GridWidth, request.GridHeight);
