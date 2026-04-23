@@ -6,11 +6,29 @@ const MAX_GRID_SIZE = 50;
 const MAX_COMMAND_LENGTH = 100;
 
 export function parseInput(lines: string[]): ParsedInput | ParseError {
-  if (lines.length < 3) {
+  // Extract the first simulation (stop at blank line)
+  const firstSimulation: string[] = [];
+  for (const line of lines) {
+    const trimmed = line.trim();
+    // Skip comments
+    if (trimmed.startsWith("#")) {
+      continue;
+    }
+    // Stop at blank line (end of this simulation)
+    if (trimmed.length === 0 && firstSimulation.length > 0) {
+      break;
+    }
+    // Add non-empty lines
+    if (trimmed.length > 0) {
+      firstSimulation.push(trimmed);
+    }
+  }
+
+  if (firstSimulation.length < 3) {
     return { line: 0, message: "Input must have at least 3 lines: grid dimensions and one robot" };
   }
 
-  const gridMatch = lines[0]?.match(/^(\d+)\s+(\d+)$/);
+  const gridMatch = firstSimulation[0]?.match(/^(\d+)\s+(\d+)$/);
   if (!gridMatch) {
     return { line: 1, message: "First line must be grid dimensions: WIDTH HEIGHT" };
   }
@@ -30,8 +48,8 @@ export function parseInput(lines: string[]): ParsedInput | ParseError {
   let lineNum = 1;
   let robotIndex = 0;
 
-  while (lineNum < lines.length) {
-    const line = lines[lineNum];
+  while (lineNum < firstSimulation.length) {
+    const line = firstSimulation[lineNum];
     if (!line || line.trim() === "") {
       lineNum++;
       continue;
@@ -51,14 +69,14 @@ export function parseInput(lines: string[]): ParsedInput | ParseError {
 
     lineNum++;
 
-    if (lineNum >= lines.length) {
+    if (lineNum >= firstSimulation.length) {
       return {
         line: lineNum + 1,
         message: `Robot ${robotIndex + 1} is missing commands line`,
       };
     }
 
-    const commandsLine = lines[lineNum];
+    const commandsLine = firstSimulation[lineNum];
     if (!commandsLine) {
       return {
         line: lineNum + 1,

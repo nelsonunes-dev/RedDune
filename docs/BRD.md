@@ -65,7 +65,7 @@ RedDune
 │
 ├── docs
 │   └── sample-data
-│       ├── inputs.txt            # Sample input files (one simulation per blank line)
+│       ├── inputs.txt              # Sample input files (one simulation per blank line)
 │       └── outputs.txt
 │
 └── tests

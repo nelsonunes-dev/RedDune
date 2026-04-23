@@ -36,8 +36,8 @@ RedDune
 │
 ├── docs
 │   └── sample-data
-│       ├── inputs.txt                  # Sample input files
-│       └── outputs.txt                 # Expected outputs
+│       ├── inputs.txt              # Sample input files
+│       └── outputs.txt             # Expected outputs
 │
 └── tests
     ├── RedDune.Tests               # C# unit tests
@@ -87,11 +87,17 @@ npm install
 npm run build
 
 # Run with classic input format
+# Bash / WSL:
 echo -e "5 3\n1 1 E\nRFRFFFRF" | node dist/cli.js
+# PowerShell:
+Write-Output "5 3`n1 1 E`nRFRFFFRF" | node .\dist\cli.js
 # Output: (1, 0) E
 
 # Or with multiple robots
+# Bash / WSL:
 echo -e "5 3\n1 1 E\nRFRFFFRF\n3 2 N\nFLLFLLF" | node dist/cli.js
+# PowerShell:
+Write-Output "5 3`n1 1 E`nRFRFFFRF`n3 2 N`nFLLFLLF" | node .\dist\cli.js
 # Output:
 # (1, 0) E
 # (3, 3) N LOST
@@ -201,10 +207,16 @@ $ head -n 6 docs/sample-data/inputs.txt | node dist/cli.js
 
 # Or run with echo for custom input:
 echo "5 3" | node dist/cli.js
+# Bash / WSL:
 echo -e "5 3\n1 1 E\nRFRFFFRF" | node dist/cli.js
+# PowerShell:
+Write-Output "5 3`n1 1 E`nRFRFFFRF" | node dist/cli.js
 
 # Run with a file:
+# Bash / WSL:
 node dist/cli.js < my-simulation.txt
+# PowerShell:
+Get-Content my-simulation.txt | node .\dist\cli.js
 ```
 
 Example with custom input:

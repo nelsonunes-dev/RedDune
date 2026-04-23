@@ -1,5 +1,5 @@
 {
-  "name": "reddune-console-typescript",
+  "name": "reddune",
   "version": "1.0.0",
   "description": "TypeScript CLI client for RedDune Martian Robots simulation",
   "main": "dist/index.js",

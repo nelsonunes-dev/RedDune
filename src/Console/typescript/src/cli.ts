@@ -30,8 +30,12 @@ Input Format (one simulation at a time):
   (repeat for additional robots)
 
 Examples:
-  echo -e "5 3\\n1 1 E\\nRFRFFFRF" | node dist/cli.js
+  # Bash / WSL:
+  echo -e "5 3\n1 1 E\nRFRFFFRF" | node dist/cli.js
   node dist/cli.js < my-simulation.txt
+  # PowerShell:
+  Write-Output "5 3\`n1 1 E\`nRFRFFFRF" | node dist/cli.js
+  Get-Content my-simulation.txt | node .\dist\cli.js
 
   # Multiple simulations - run separately:
   head -n 3 docs/sample-data/inputs.txt | node dist/cli.js
@@ -81,11 +85,9 @@ async function main(argv: string[]): Promise<number> {
   }
 
   const inputLines = await readStdin();
-  const trimmedLines = inputLines
-    .map((l) => l.trim())
-    .filter((l) => l.length > 0);
+  const trimmedLines = inputLines.map((l) => l.trim());
 
-  if (trimmedLines.length === 0) {
+  if (trimmedLines.filter((l) => l.length > 0).length === 0) {
     console.error("Error: No input provided");
     console.error("Usage: reddune < grid.txt or echo '5 3' | reddune");
     return 1;
